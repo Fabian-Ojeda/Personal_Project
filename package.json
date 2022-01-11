@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "fabian": "echo Solo miyos loka",
-    "start": "node app"
+    "start": "node app",
+    "dev": "nodemon app"
   },
   "author": "Fabián Ojeda",
   "license": "ISC",

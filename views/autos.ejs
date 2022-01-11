@@ -1,0 +1,15 @@
+<%- include("templates/header", {tituloWeb: title}) %>
+
+<div class="container">
+    <% if (content.length > 0) { %>
+        <ul>
+        <% content.forEach(element => { %>
+            <li> <%= element.id%>. <%= element.name %></li>
+        <% }) %>
+        </ul>
+        <% } else { %>
+        <a>No pailas</a>
+    <%}%>
+</div>
+
+<%- include("templates/footer", {footerMessage:"footer de autos"}) %>
