@@ -1,0 +1,13 @@
+<%- include("templates/header", {tituloWeb: title}) %>
+<div class="container">
+    <h1>Nuevo viaje</h1>
+    <form action="/viajes/nuevoViajeCreado" method="POST">
+        <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+        <input type="text" class="form-control" name="origen" placeholder="Origen">
+        <input type="text" class="form-control" name="destino" placeholder="Destino">
+        <input type="text" class="form-control" name="descripcion" placeholder="Descripción">
+        <button class="btn btn-success btn-block my-4" type="submit">Crear</button>
+    </form>
+</div>
+
+<%- include("templates/footer", {footerMessage:"footer del nuevo viaje"}) %>

@@ -12,6 +12,19 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/nuevo',  (req, res) => {
+    res.render('nuevoViaje',{title:'Nuevo Viaje'})
+});
 
+router.post('/nuevoViajeCreado', async(req, res) => {
+    try {
+        const viajeDB = new viaje(req.body)
+        await viajeDB.save()
+        console.log("listo?")
+        res.redirect('/viajes')
+    }catch (e){
+        console.log(e)
+    }
+})
 
 module.exports = router

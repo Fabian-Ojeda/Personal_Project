@@ -1,12 +1,25 @@
 <%- include("templates/header", {tituloWeb: title}) %>
 
 <div class="container">
+    <div class="d-grid gap-2">
+        <a class="btn btn-success" href="/viajes/nuevo" role="button">Crear nuevo viaje</a>
+    </div>
     <% if (content.length > 0) { %>
-        <ul>
+
             <% content.forEach(element => { %>
-                <li> <%= element.id%>. <%= element.nombre %></li>
+                <div class="m-5 card">
+                    <div class="card-header">
+                        <%= element.nombre %>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= element.origen%> - <%= element.destino %></h5>
+                        <p class="card-text"><%= element.descripcion %></p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
             <% }) %>
-        </ul>
+
     <% } else { %>
         <a>No pailas</a>
     <%}%>
