@@ -1,0 +1,63 @@
+<%- include("templates/header", {tituloWeb: title}) %>
+<div class="container">
+    <% if (find) { %>
+    <div class="row">
+        <div class="col">
+            Nombre
+        </div>
+        <div class="col">
+            <%= viaje.nombre %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Origen
+        </div>
+        <div class="col">
+            <%= viaje.origen %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Destino
+        </div>
+        <div class="col">
+            <%= viaje.destino %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Descripción
+        </div>
+        <div class="col">
+            <%= viaje.descripcion %>
+        </div>
+    </div>
+        <a href="/viajes/editar/<%= viaje.id %>" class="btn btn-primary">Editar</a>
+        <button class="btn btn-danger" id="BtnEliminar">Eliminar</button>
+    </div>
+    <% } else { %>
+            <h1>ESO NO ECSISTE!!!!!!!!</h1>
+    <%}%>
+</div>
+
+<%- include("templates/footer", {footerMessage:"footer de detalles del viaje"}) %>
+
+<script>
+    const btnEliminar = document.querySelector('#BtnEliminar')
+    btnEliminar.addEventListener('click', async () => {
+        try {
+            const data = await fetch('/viajes/delete/<%= viaje.id %>',{
+                method: 'delete'
+            })
+            const res = await data.json()
+            if (res.estado) {
+                window.location.href = '/viajes'
+            } else {
+                alert('Error')
+            }
+        } catch (e){
+            console.log(e)
+        }
+    })
+</script>

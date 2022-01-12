@@ -27,4 +27,40 @@ router.post('/nuevoViajeCreado', async(req, res) => {
     }
 })
 
+router.get('/:id', async(req, res) => {
+
+    const id = req.params.id
+
+    try {
+        const viajeDb = await viaje.findOne({_id:id})
+        console.log(viajeDb)
+        res.render('viajeDetalles', {title:"Detalles del viaje", viaje:viajeDb, find:true})
+    }catch (e){
+        console.log(e)
+        res.render('viajeDetalles', {title:"Detalles del viaje", find:false})
+    }
+})
+
+router.delete('/delete/:id', async (req, res) => {
+    const id = req.params.id
+
+    try {
+        const viajeDb = await viaje.findByIdAndDelete({_id:id})
+
+        if (viajeDb){
+            res.json({
+                estado:true,
+                mensaje:"Eliminación realizada correctamente!"
+            })
+        } else {
+            res.json({
+                estado:false,
+                mensaje:"No se pudo eliminar correctamente!"
+            })
+        }
+    } catch (e){
+        console.log(e)
+    }
+})
+
 module.exports = router
