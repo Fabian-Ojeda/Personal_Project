@@ -1,0 +1,41 @@
+<%- include("templates/header", {tituloWeb: title}) %>
+<div class="container">
+    <h1>Editar viaje</h1>
+    <form id="formEditar"  data-id="<%= viaje.id %>">
+        <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="<%= viaje.nombre %>">
+        <input type="text" class="form-control" name="origen" placeholder="Origen" value="<%= viaje.origen %>">
+        <input type="text" class="form-control" name="destino" placeholder="Destino" value="<%= viaje.destino %>">
+        <input type="text" class="form-control" name="descripcion" placeholder="Descripción" value="<%= viaje.descripcion %>">
+        <button class="btn btn-success btn-block my-4" type="submit">Editar</button>
+    </form>
+</div>
+<%- include("templates/footer", {footerMessage:"footer de editar viaje"}) %>
+
+<script>
+    const formulario = document.querySelector('#formEditar')
+    formulario.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        const nombre = formulario.elements['nombre'].value
+        const origen = formulario.elements['origen'].value
+        const destino = formulario.elements['destino'].value
+        const descripcion = formulario.elements['descripcion'].value
+
+        try {
+            const data = await fetch('/viajes/editarViaje/<%= viaje.id %>',{
+                method: 'put',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({nombre, origen, destino, descripcion})
+            })
+            const res = await data.json()
+            if (res.estado){
+                window.location.href = '/viajes'
+            } else {
+                alert(res.mensaje)
+            }
+            console.log(res)
+        } catch (e){
+            console.log(e)
+        }
+    })
+
+</script>

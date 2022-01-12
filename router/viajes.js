@@ -63,4 +63,31 @@ router.delete('/delete/:id', async (req, res) => {
     }
 })
 
+router.get('/editar/:id',async (req, res)=>{
+    const id = req.params.id
+    try {
+        const viajeDb = await viaje.findOne({_id:id})
+        res.render('editarViaje', {title:"Editar viaje", viaje:viajeDb})
+    }catch (e){
+        console.log(e)
+    }
+})
+
+router.put('/editarViaje/:id', async (req, res) => {
+    const id = req.params.id
+    const body = req.body
+    try {
+        const viajeDb = await viaje.findByIdAndUpdate(id, body, {useFindAndModify:false})
+        res.json({
+            estado:true,
+            mensaje:"Actualización realizada correctamente!"
+        })
+    }catch (e){
+        console.log(e)
+        res.json({
+            estado:true,
+            mensaje:"La actualización no se ha podido realizar correctamente    !"
+        })
+    }
+})
 module.exports = router
